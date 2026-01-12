@@ -1,0 +1,58 @@
+package com.xzit.entity;
+
+import com.baomidou.mybatisplus.annotation.*;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
+
+import java.io.Serializable;
+import java.time.LocalDateTime;
+
+/**
+ * <p>
+ * 
+ * </p>
+ *
+ * @author Gule
+ * @since 2025-06-01
+ */
+@Getter
+@Setter
+@Data
+@Accessors(chain = true)
+@TableName("sys_role")
+@ApiModel(value = "Role对象", description = "")
+public class Role implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    @ApiModelProperty("角色id")
+    @TableId(value = "id", type = IdType.AUTO)
+    private Integer id;
+
+    @ApiModelProperty("角色编码")
+    private String roleCode;
+
+    @ApiModelProperty("角色名称")
+    private String roleName;
+
+    @ApiModelProperty("创建人id")
+    private Integer createrId;
+
+    @ApiModelProperty("创建时间")
+    @TableField(fill = FieldFill.INSERT)
+    private LocalDateTime createTime;
+
+    @ApiModelProperty("修改时间")
+    @TableField(fill = FieldFill.INSERT_UPDATE)
+    private LocalDateTime updateTime;
+
+    @ApiModelProperty("备注")
+    private String remark;
+
+    @ApiModelProperty("是否删除")
+    private Boolean deleted;
+}

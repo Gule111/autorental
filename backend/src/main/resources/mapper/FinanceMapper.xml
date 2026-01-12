@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xzit.mapper.FinanceMapper">
+    <select id="countDayRental" resultType="com.xzit.vo.FinanceNumDayVo">
+        select HOUR(rental_time) hours,
+            count(id) rentalNum
+        from busi_order
+        where date(rental_time)=date(now())
+        GROUP BY hours order by 1
+    </select>
+    <select id="countDayReturn" resultType="com.xzit.vo.FinanceNumDayVo">
+        select HOUR(return_time) hours,
+            count(id) returnNum
+        from busi_order
+        where date(return_time)=date(now())
+        GROUP BY hours order by 1
+
+    </select>
+    <select id="sumRentPay" resultType="com.xzit.vo.FinanceCostVo">
+        select IFNULL(sum(rent_payable), 0) countRentPayable,
+               IFNULL(sum(rent_actual), 0) countRentActual
+        from busi_order
+        where date(return_time)=date(now())
+    </select>
+    <select id="sumDeposit" resultType="java.lang.Integer">
+        select IFNULL(sum(deposit), 0) from busi_order
+        where date(return_time)=date(now())
+    </select>
+    <select id="countMonthRental" resultType="com.xzit.vo.FinanceNumMonthVo">
+        select day(date(rental_time)) days,
+            count(id) rentalNum
+        from busi_order
+        where month(rental_time)=month(now())
+        GROUP BY 1 order by 1
+    </select>
+    <select id="countMonthReturn" resultType="com.xzit.vo.FinanceNumMonthVo">
+        select day(date(return_time)) days,
+            count(id)              returnNum
+        from busi_order
+        where month(return_time) = month(now())
+        GROUP BY 1
+        order by 1
+    </select>
+    <select id="sumRentPayMonth" resultType="com.xzit.vo.FinanceCostVo">
+        select IFNULL(sum(rent_payable), 0) countRentPayable,
+               IFNULL(sum(rent_actual), 0) countRentActual
+        from busi_order
+        where month(return_time)=month(now())
+    </select>
+    <select id="sumDepositMonth" resultType="java.lang.Integer">
+        select IFNULL(sum(deposit), 0) from busi_order
+        where month(return_time)=month(now())
+    </select>
+
+</mapper>

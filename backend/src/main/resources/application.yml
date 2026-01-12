@@ -1,0 +1,57 @@
+server:
+  port: 8888
+spring:
+  mail:
+    host: smtp.qq.com
+    port: 465
+    username: 3150703586@qq.com
+    password: vnhejpeqnakkdcjj
+    properties:
+      mail.smtp.auth: true
+      mail.smtp.ssl.enable: true
+      mail.smtp.socketFactory.class: javax.net.ssl.SSLSocketFactory
+      mail.smtp.socketFactory.port: 465
+  datasource:
+    username: root
+    password: {pwd}
+    url: jdbc:mysql://localhost:3306/car_project?characterEncoding=utf8&useUnicode=true&serverTimezone=GMT%2B8&useSSL=false&allowPublicKeyRetrieval=true
+  jackson:
+    date-format: yyyy-MM-dd
+    time-zone: Asia/Shanghai
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+    format:
+      date: yyyy-MM-dd
+      time: yyyy-MM-dd HH:mm:ss
+  data:
+    redis:
+      host: 192.168.139.140
+      port: 6379
+      database: 0
+      timeout: 10000
+      expire: 1000000
+      password: 123456
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    mapper-locations: classpath*:mapper/*.xml
+    type-aliases-package: com.xzit.entity
+  global-config:
+    db-config:
+      logic-delete-field: deleted
+encoder:
+  ctype:
+    strength: 6
+    secret: ${random.uuid}
+request:
+  login-url: /auto/user/login
+aliyun:
+  oss:
+    endpoint: oss-cn-chengdu.aliyuncs.com
+    access-key-id: {xx}
+    access-key-secret: {xx}
+    bucket-name: auto-test-gule
+auto:
+  info:
+    maintain-mileage: 5000
